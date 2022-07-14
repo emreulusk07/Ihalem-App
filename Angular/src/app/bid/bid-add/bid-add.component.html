@@ -1,0 +1,40 @@
+<div role="main">
+    <div class="container">
+        <div class="row">
+            <form [formGroup]="bidAddForm" (ngSubmit)="bidAdd()" class="form-bidAdd">
+                <h2 class="mt-3 pt-3 mb-4">Yeni bir ihale ekle</h2>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="name" formControlName="name" placeholder="İhale adı" autofocus>
+                  <span class="help-block" *ngIf="bidAddForm.get('name')?.hasError('required') && bidAddForm.get('name')?.touched">
+                      İhale adı girilmesi zorunludur.
+                  </span>
+                    <input type="number" class="form-control" id="startPrice" formControlName="startPrice" placeholder="İhale başlangıç fiyatı">
+                    <span class="help-block" *ngIf="bidAddForm.get('startPrice')?.hasError('required') && bidAddForm.get('startPrice')?.touched">
+                        İhale başlangıç fiyatı girilmesi zorunludur.
+                    </span>
+                    <input type="text" class="form-control" id="bidCity" formControlName="bidCity" placeholder="İhale Şehri">
+                    <span class="help-block" *ngIf="bidAddForm.get('bidCity')?.hasError('required') && bidAddForm.get('bidCity')?.touched">
+                        İhale şehri girilmesi zorunludur.
+                    </span>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                          <input matStartDate formControlName="start" placeholder="Start date">
+                          <input matEndDate formControlName="end" placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      
+                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                      </mat-form-field>
+                  </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block bg-dark" *ngIf="isAuthenticated" [disabled]="!bidAddForm.valid">İhale Ekle</button>
+                <h6>{{bidAddForm.value|json}}</h6>
+                <h6>{{bidAddForm.status|json}}</h6>
+              </form>
+        </div>
+    </div>
+</div>
+
+<!--<app-photo></app-photo>-->

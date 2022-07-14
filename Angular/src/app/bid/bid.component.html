@@ -1,0 +1,71 @@
+<div class="container">
+
+    <form class="d-flex my-2 my-lg-4">
+        <input type="search" placeholder="İhale Ara" name="search" class="form-control mr-sm-2" [(ngModel)]="searchText"
+            style="width: 90%;">
+        <!--<button type="submit"><i class="btn fa fa-search"></i></button>-->
+    </form>
+
+    <div class="col" style="text-align: center;">
+        <button class="btn btn-secondary pt-2 m-1 submit" (click)="showBid('continueBid')">Devam Eden İhaleler</button>
+        <button class="btn btn-secondary pt-2 m-1 submit" (click)="showBid('endBid')">Bitmiş Olan İhaleler</button>
+    </div>
+
+    <div class="row">
+        <ng-container *ngFor="let bid of bids | bidSearch:searchText">
+            <ng-container *ngIf="currentBid == 'continueBid'">
+                <div *ngIf="offerDateControl(bid.endDate)" class="tabcontent" class="col-md-12 mt-4 pt-3">
+                    <div class="card mb-4 shadow-sm" style="flex-direction: row;">
+                        <img role="img" aria-label="Placeholder: Ihale" class="card-img-top" src="{{bid.url}}"
+                            alt="Card image cap" style="width: 45%; height: 225px;"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                        <div class="card-body">
+                            <h4 *ngIf="bid" class="card-text">{{bid.name}}</h4>
+                            <p *ngIf="bid" class="card-text">İhale Şehri: {{bid.bidCity}} <br>İhale Bitiş Tarihi:
+                                {{bid.endDate}} <br>İhale Başlangıç Fiyatı: {{bid.startPrice}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" routerLink="/bidDetail/{{bid.id}}"
+                                        class="btn btn-sm btn-outline-secondary">Detay</button>
+                                    <button type="button" routerLink="/offerAdd/{{bid.id}}"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        *ngIf="offerDateControl(bid.endDate)">Teklif Yap</button>
+                                </div>
+                                <small class="text-muted">İhale Id: {{bid.id}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngFor="let bid of bids | bidSearch:searchText">
+            <ng-container *ngIf="currentBid=='endBid'">
+                <div *ngIf="!offerDateControl(bid.endDate)" class="tabcontent" class="col-md-12 mt-4 pt-3">
+                    <div class="card mb-4 shadow-sm" style="flex-direction: row;">
+                        <img role="img" aria-label="Placeholder: Ihale" class="card-img-top" src="{{bid.url}}"
+                            alt="Card image cap" style="width: 45%; height: 225px;"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                        <div class="card-body">
+                            <h4 *ngIf="bid" class="card-text">{{bid.name}}</h4>
+                            <p *ngIf="bid" class="card-text">İhale Şehri: {{bid.bidCity}} <br>İhale Bitiş Tarihi:
+                                {{bid.endDate}} <br>İhale Başlangıç Fiyatı: {{bid.startPrice}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" routerLink="/bidDetail/{{bid.id}}"
+                                        class="btn btn-sm btn-outline-secondary">Detay</button>
+                                    <button type="button" routerLink="/offerAdd/{{bid.id}}"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        *ngIf="offerDateControl(bid.endDate)">Teklif Yap</button>
+                                </div>
+                                <small class="text-muted">İhale Id: {{bid.id}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-login">
+    <h2 class="mt-5">Giriş</h2>
+    <div class="form-group mt-4">
+        <input type="text" id="mail" name="mail" formControlName="mail" class="form-control" placeholder="E-posta"
+            autofocus>
+        <span class="help-block" *ngIf="loginForm.get('mail')?.hasError('required') && loginForm.get('mail')?.touched">
+            Mail adresi girilmesi zorunludur.
+        </span>
+    </div>
+    <div class="form-group">
+        <input type="password" id="password" name="password" formControlName="password" class="form-control"
+            placeholder="Şifre">
+        <span class="help-block"
+            *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+            Şifre girilmesi zorunludur.
+        </span>
+        <span class="help-block"
+            *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+            Şifre en az 5 karakter boyutunda olmalıdır.
+        </span>
+        <span class="help-block"
+            *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">
+            Şifre en fazla 10 karakter boyutunda olmalıdır.
+        </span>
+
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block bg-dark mt-4" [disabled]="!loginForm.valid" type="submit">Giriş Yap</button>
+    
+</form>

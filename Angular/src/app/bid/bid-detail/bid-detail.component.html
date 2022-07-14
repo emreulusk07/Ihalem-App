@@ -1,0 +1,30 @@
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mt-3 pt-3">{{bid.name}}'nin Fotoğrafları</h2>
+            <div *ngFor="let photo of bid?.photos">
+                <img [src]="photo.url" [alt]="photo.id" style="height: 16rem; width: 25rem; margin-bottom: 1rem">
+            </div>
+        </div>
+        <div *ngIf="bid" class="col-md-6">
+            <h2 class="mt-3 pt-3">Detaylar</h2>
+            <ul *ngIf="bid">
+                <li style="background-color: darkgrey; margin-top: 10px; margin-bottom: 10px;">
+                    <strong>İhale Id: </strong>  <span>{{bid.id}}</span>
+                </li>
+                <li style="background-color: darkgrey; margin-top: 10px; margin-bottom: 10px;">
+                    <strong>İhale Şehri: </strong>  <span>{{bid.bidCity}}</span>
+                </li>
+                <li style="background-color: darkgrey; margin-top: 10px; margin-bottom: 10px;">
+                    <strong>İhale Başlangıç-Bitiş Tarihi: </strong>  <span>{{bid.startDate}} - {{bid.endDate}}</span>
+                </li>
+                <li style="background-color: darkgrey; margin-top: 10px; margin-bottom: 10px;">
+                    <strong>İhale Başlangıç Fiyatı: </strong>  <span>{{bid.startPrice}}</span>
+                </li>
+                <li style="background-color: darkgrey; margin-top: 10px; margin-bottom: 10px;">
+                    <strong>İhale Kazanan Id: </strong>  <span>{{winnerOffer.userId}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>

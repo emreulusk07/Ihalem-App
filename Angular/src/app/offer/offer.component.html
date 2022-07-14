@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div class="row">
+        <h2 class="mt-4" style="text-align: center;">Tüm İhale Teklifleri</h2>
+        <div *ngFor="let offer of offers" class="col-md-6 mt-5 pt-3">
+            <div class="card shadow-sm" style="border-color: gray;">
+                <div class="card-body">
+                    <strong><h4 *ngIf="offer" class="card-text mb-4">{{offer.id}} Id Numaralı Teklif</h4></strong>
+                    <p *ngIf="offer" class="card-text">İhale Fiyatı: {{offer.bidPrice}} <br>İhale Zamanı: {{offer.bidTime}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" routerLink="/offerDetail/{{offer.id}}" style="background-color: gray; color: white;" 
+                            class="btn btn-sm btn-outline-secondary">İhale Teklif Detayı</button>
+                        </div>
+                        <div class="row">
+                            <small class="text-muted">İhale Id: {{offer.bidId}}</small>
+                            <small class="text-muted">Teklif Veren Id: {{offer.userId}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
